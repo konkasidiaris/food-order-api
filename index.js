@@ -1,6 +1,11 @@
+import 'dotenv/config';
 const express = require('express');
 const app = express();
 const port = 3000;
+
+/**
+ * process.env.DB_SECRET
+ */
 
 app.get('/', (req, res) => res.send('Hello World!'));
 
