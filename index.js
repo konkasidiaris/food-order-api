@@ -1,7 +1,27 @@
 import 'dotenv/config';
-const express = require('express');
+import express from 'express';
+import {MongoClient} from 'mongodb';
+
 const app = express();
 const port = 3000;
+const dsn = 'mongodb://localhost:37017/food-order-db';
+
+MongoClient.connect(dsn,{ useUnifiedTopology: true }, (err,db) => {
+    if (err) throw err;
+    console.log("Connected successfully to MongoDB server");
+    db.close();
+});
+
+function inserMongoDB(collection, data){
+    const promisedInserts = [];
+
+    Object.keys(data).forEach((key) => {
+        promisedInserts.push(
+            colleciton.inserOne({date: key, value: data[key]})
+        );
+    });
+    return Promise.all(promisedInserts);
+}
 
 /**
  * process.env.DB_SECRET
