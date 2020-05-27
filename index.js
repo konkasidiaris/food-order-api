@@ -1,33 +1,64 @@
-import 'dotenv/config';
 import express from 'express';
-import {MongoClient} from 'mongodb';
+import mongoose from 'mongoose';
+import config from './config';
+import menuService from './src/services/menuService';
+import bodyParser from 'body-parser';
+
+mongoose.connect(config.mongodb.dsn)
+    .then(() => {
+        console.log('Successfully connected to mongodb');
+    });
 
 const app = express();
+app.use(bodyParser.json());
 const port = 3000;
-const dsn = 'mongodb://localhost:37017/food-order-db';
 
-MongoClient.connect(dsn,{ useUnifiedTopology: true }, (err,db) => {
-    if (err) throw err;
-    console.log("Connected successfully to MongoDB server");
-    db.close();
+// const categories = {
+//     APPETIZERS: "Appetizers",
+//     SALADS: "Salads",
+//     MAIN_DISHES: "Main Dishes",
+//     BEVERAGES: "Beverages",
+//     DESSERTS: "Desserts"
+// }
+
+// const food_tags = {
+//     REGULAR: "Regular",
+//     PESCATERIAN: "Pescaterian",
+//     VEGETERIAN: "Vegeterian",
+//     VEGAN: "Vegan",
+//     NUT_FREE: "Nut free"
+// }
+
+// const currency = {
+//     AUSTRALIAN_DOLLAR: "AUD",
+//     CANADIAN_DOLLAR: "CAD",
+//     SWITZERLAND_FRANC: "CHF",
+//     CHINESE_YUAN: "CNY",
+//     EURO: "EUR",
+//     GREAT_BRITAIN_POUND: "GBP",
+//     JAPANESE_YEN: "JPY",
+//     US_DOLLAR: "USD"
+// }
+
+app.get('/menu', async (req, res, next) => {
+    try {
+        const items = await menuService.getAll();
+        res.send(items);
+    } catch(err){
+        return next(err);
+    }
+    
 });
 
-function inserMongoDB(collection, data){
-    const promisedInserts = [];
-
-    Object.keys(data).forEach((key) => {
-        promisedInserts.push(
-            colleciton.inserOne({date: key, value: data[key]})
-        );
-    });
-    return Promise.all(promisedInserts);
-}
-
-/**
- * process.env.DB_SECRET
- */
-
-app.get('/', (req, res) => res.send('Hello World!'));
+app.post('/menu', async (req, res) => {
+    const {id,name,category,description,price,availability }= req.body;
+    try {
+        await menuService.addToMenu({id,name,category,description,price,availability });
+        return res.send("OK");
+    } catch (err){
+        console.log(err);
+    }
+});
 
 app.use((req, res, next) => res.status(404).send("Sorry can't find that!"));
 app.use((err, req, res, next) => {
