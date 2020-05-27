@@ -1,0 +1,166 @@
+[{
+  "_id": {
+    "$oid": "5ece991ecd32c83d34e2ba3b"
+  },
+  "id": 2,
+  "name": "Tzatziki",
+  "category": "Appetizers",
+  "description": "traditional greek appetizer with greek yogurt, cucumber and garlic",
+  "price": "2.5",
+  "availability": true,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ece993bcd32c83d34e2ba3c"
+  },
+  "id": 1,
+  "name": "Feta",
+  "category": "Appetizers",
+  "description": "traditional greek cheese",
+  "price": "2.5",
+  "availability": true,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ece997dcd32c83d34e2ba3d"
+  },
+  "id": 3,
+  "name": "French fries",
+  "category": "Appetizers",
+  "description": "Potatoes from Naxos, handcut and cooked in virgin olive oil",
+  "price": "2.4",
+  "availability": true,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ece99bbcd32c83d34e2ba3e"
+  },
+  "id": 4,
+  "name": "Greek salad",
+  "category": "Salads",
+  "description": "traditional greek salad",
+  "price": "5.5",
+  "availability": true,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ece99e3cd32c83d34e2ba3f"
+  },
+  "id": 5,
+  "name": "Ceasar's",
+  "category": "Salads",
+  "description": "The famous ceasar's salad with a touch of our chef's taste",
+  "price": "3.5",
+  "availability": true,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ece9a0bcd32c83d34e2ba40"
+  },
+  "id": 6,
+  "name": "Grilled vegetables",
+  "category": "Salads",
+  "description": "Hand picked carrots, bell peppers and zucchinis from our garden",
+  "price": "5",
+  "availability": true,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ece9a16cd32c83d34e2ba41"
+  },
+  "id": 7,
+  "name": "Chicken breast",
+  "category": "Main Dishes",
+  "description": "Juicy chicken breast cooked in sous vide for 2 hours",
+  "price": "10",
+  "availability": true,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ece9a21cd32c83d34e2ba42"
+  },
+  "id": 8,
+  "name": "Beef steak",
+  "category": "Main Dishes",
+  "description": "Grilled beef steak",
+  "price": "11",
+  "availability": true,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ece9a2ccd32c83d34e2ba43"
+  },
+  "id": 9,
+  "name": "Veggie burger",
+  "category": "Main Dishes",
+  "description": "Burger made from soybeans, zucchini and eggplant",
+  "price": "7",
+  "availability": true,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ece9a36cd32c83d34e2ba44"
+  },
+  "id": 10,
+  "name": "Cheesecake",
+  "category": "Desserts",
+  "description": "lemon flavored",
+  "price": "5",
+  "availability": true,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ece9a41cd32c83d34e2ba45"
+  },
+  "id": 11,
+  "name": "banoffee",
+  "category": "Desserts",
+  "description": "",
+  "price": "5",
+  "availability": true,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ece9a4ccd32c83d34e2ba46"
+  },
+  "id": 12,
+  "name": "Brownies",
+  "category": "Desserts",
+  "description": "Chocolate brownies",
+  "price": "5",
+  "availability": true,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ece9a56cd32c83d34e2ba47"
+  },
+  "id": 13,
+  "name": "Coca cola",
+  "category": "Beverages",
+  "description": "300ml",
+  "price": "2",
+  "availability": true,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ece9a5fcd32c83d34e2ba48"
+  },
+  "id": 14,
+  "name": "Sprinkle water",
+  "category": "Beverages",
+  "description": "200ml",
+  "price": "2",
+  "availability": true,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ece9a68cd32c83d34e2ba49"
+  },
+  "id": 15,
+  "name": "Water",
+  "category": "Beverages",
+  "description": "500ml",
+  "price": "1",
+  "availability": true,
+  "__v": 0
+}]
