@@ -7,7 +7,7 @@ async function createCart(userId){
 }
 
 async function getCart(userId) {
-    let cart = await CartModel.findOne({ userId: userId })
+    let cart = await CartModel.findOne({ userId: userId });
     if (!cart){
         cart = await createCart(userId);
     }
@@ -21,8 +21,12 @@ async function updateCart(cart) {
     return oldCart.save();
 }
 
+async function deleteCart(userId){
+    return CartModel.deleteOne({userId:userId});
+}
 
 module.exports = {
     getCart,
-    updateCart
+    updateCart,
+    deleteCart
 }
