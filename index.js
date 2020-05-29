@@ -1,46 +1,25 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import config from './config';
-import menuService from './src/services/menuService';
-import cartService from './src/services/cartService';
+import menuService from './src/main/services/menuService';
+import cartService from './src/main/services/cartService';
 import bodyParser from 'body-parser';
-import session from 'express-session';
+import uuidService from './src/main/services/uuidService';
 
-mongoose.connect(config.mongodb.dsn, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true })
-    .then(() => {
-        console.log('Successfully connected to mongodb');
-    });
+mongoose.connect(
+    config.mongodb.dsn,
+    {
+        useNewUrlParser: true,
+        useCreateIndex: true,
+        useUnifiedTopology: true
+    })
+    .then(() => console.log('Successfully connected to mongodb')
+    );
 
 const app = express();
 app.use(bodyParser.json());
 
-const MILLIS_IN_SECOND = 1000;
-const SECONDS_IN_MINUTE = 60;
-const MINUTES_IN_HOUR = 60;
-const TWO_HOURS = MILLIS_IN_SECOND * SECONDS_IN_MINUTE * MINUTES_IN_HOUR * 2;
-
-const {
-    PORT = 3000,
-    NODE_ENV = 'development',
-    SESSION_SECRET = 'secret',
-    SESSION_NAME = 'SID',
-    SESSION_LIFETIME = TWO_HOURS
-} = process.env;
-
-const IS_PRODUCTION = NODE_ENV === 'production';
-
-app.use(session({
-    name: SESSION_NAME,
-    secret: SESSION_SECRET,
-    resave: true,
-    rolling: true,
-    saveUninitialized: true,
-    cookie: {
-        maxAge: SESSION_LIFETIME,
-        sameSite: true,
-        secure: IS_PRODUCTION
-    }
-}))
+const PORT = 3000;
 
 // const categories = {
 //     APPETIZERS: "Appetizers",
@@ -61,23 +40,13 @@ app.use(session({
 //     US_DOLLAR: "USD"
 // }
 
-//middleware
-const cookieCheck = (req, res, next) => {
-    if (!req.session.userId){
-
-    } 
-    next();
-}
-
 app.get('/menu', async (req, res) => {
-    const { userId } = req.session;
     try {
         const items = await menuService.getAll();
         return res.send(items);
     } catch (err) {
         console.log(err);
     }
-    // req.session.userId = "asdf"
 });
 
 app.get('/menu/:category?', async (req, res) => {
@@ -100,10 +69,14 @@ app.post('/menu', async (req, res) => {
     }
 });
 
-app.get('/cart/:id?', async (req, res) => {
-    const id = req.params.id;
+app.get('/uuid', async (req, res) => {
+    return res.send(uuidService.createUUId());
+});
+
+app.get('/cart/:uuid?', async (req, res) => {
+    const uuid = req.params.uuid;
     try {
-        const cart = await cartService.getCart(id);
+        const cart = await cartService.getCart(uuid);
         return res.send(cart);
     } catch (err) {
         console.log(err);
@@ -111,9 +84,9 @@ app.get('/cart/:id?', async (req, res) => {
 });
 
 app.post('/addToCart', async (req, res) => {
-    const item = req.body;
+    const cart = req.body;
     try {
-        const cartItem = await cartService.addCartItem(item)
+        const cartItem = await cartService.updateCart(cart)
     } catch (error) {
         console.log(error);
     }

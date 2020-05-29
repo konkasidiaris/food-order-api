@@ -1,12 +1,12 @@
 import mongoose from 'mongoose';
 
 const CartSchema = mongoose.Schema({
-    userId: { type: Number, required: true, index: true },
+    userId: { type: String, required: true, unique: true },
     items: [{
         item: {
-            name: { type: String, required: true, index: false },
-            price: { type: Number, required: true, index: false },
-            amount: { type: Number, required: true, index: false },
+            name: { type: String, required: false, index: false },
+            price: { type: Number, required: false, index: false },
+            amount: { type: Number, required: false, index: false },
         },
     }],
     totalPrice: { type: String, required: true, index: false },

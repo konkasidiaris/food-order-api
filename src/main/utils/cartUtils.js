@@ -4,6 +4,6 @@ const calculateCartTotal = (cart) => {
     }, 0);
 }
 
-module.exports = {
+export default {
     calculateCartTotal
 }

@@ -1,4 +1,4 @@
-import utils from '../main/cartUtils';
+import utils from '../../main/utils/cartUtils';
 
 const cart = {
     items: [{
