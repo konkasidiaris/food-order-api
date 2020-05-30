@@ -2,7 +2,7 @@ import menuService from '../services/menuService';
 import cartService from '../services/cartItemService';
 import uuidService from '../services/uuidService';
 import menuParser from '../utils/menuParser';
-
+import cartUtils from '../utils/cartUtils';
 
 const routes = (app) => {
     app.route('/menu')
@@ -24,7 +24,8 @@ const routes = (app) => {
             const uuid = req.params.uuid;
             try {
                 const cart = await cartService.getCart(uuid);
-                return res.send(cart);
+                const parsedResponse = await cartUtils.parseCart(cart);
+                return res.send(parsedResponse);
             } catch (err) {
                 console.log(err);
             }
@@ -33,7 +34,7 @@ const routes = (app) => {
             const uuid = req.params.uuid;
             try {
                 await cartService.deleteCart(uuid);
-                return res.status(200);
+                return res.status(200).send("Cart deleted");
             } catch (err) {
                 console.log(err);
             }
@@ -46,7 +47,18 @@ const routes = (app) => {
                 return res.redirect(`/cart/${uuid}`);
              } catch(err){ 
                 console.log(err);
-                return res.status(404).send("something went wrong");
+                return res.status(500).send("something went wrong");
+            }
+        });
+    app.route('/removeFromCart')
+        .post(async (req, res) => {
+            const {uuid, itemId} = req.body;
+            try {
+                const cart = await cartService.removeFromCart(uuid, itemId);
+                return res.redirect(`/cart/${uuid}`);
+             } catch(err){ 
+                console.log(err);
+                return res.status(500).send("something went wrong");
             }
         });
 }
