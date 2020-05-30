@@ -1,21 +1,17 @@
 import utils from '../../main/utils/cartUtils';
 
-const cart = {
-    items: [{
+const items = [{
         name: "item1",
         price: 1,
-        amount: 2
     }, {
         name: "item2",
         price: 2,
-        amount: 2
     }, {
         name: "item3",
-        price: 5,
-        amount: 1
+        price: 5.5,
     }]
-};
+    ;
 
 test('calculates the total price of a cart', () => {
-    expect(utils.calculateCartTotal(cart)).toBe(11);
+    expect(utils.calculateCartTotal(items)).toBe(8.5);
 });

@@ -1,5 +1,5 @@
 import menuService from '../services/menuService';
-import cartService from '../services/cartService';
+import cartService from '../services/cartItemService';
 import uuidService from '../services/uuidService';
 import menuParser from '../utils/menuParser';
 
@@ -33,20 +33,22 @@ const routes = (app) => {
             const uuid = req.params.uuid;
             try {
                 await cartService.deleteCart(uuid);
-                return res.send("cart deleted");
+                return res.status(200);
             } catch (err) {
                 console.log(err);
+            }
+        });
+    app.route('/addToCart')
+        .post(async (req, res) => {
+            const {uuid, itemId} = req.body;
+            try {
+                const cart = await cartService.addToCart(uuid, itemId);
+                return res.redirect(`/cart/${uuid}`);
+             } catch(err){ 
+                console.log(err);
+                return res.status(404).send("something went wrong");
             }
         });
 }
 
 export default routes;
-
-// app.post('/addToCart', async (req, res) => {
-//     const cart = req.body;
-//     try {
-//         const cartItem = await cartService.updateCart(cart)
-//     } catch (error) {
-//         console.log(error);
-//     }
-// });

@@ -55,6 +55,6 @@ const output = [{
 }
 ]
 
-test('calculates the total price of a cart', () => {
+test('strips mongos metadata from json', () => {
     expect(menuParser.parseFromDB(input)).toStrictEqual(output);
 });
