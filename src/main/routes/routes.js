@@ -3,6 +3,7 @@ import cartService from '../services/cartItemService';
 import uuidService from '../services/uuidService';
 import menuParser from '../utils/menuParser';
 import cartUtils from '../utils/cartUtils';
+import orderService from '../services/orderService';
 
 const routes = (app) => {
     app.route('/menu')
@@ -13,6 +14,7 @@ const routes = (app) => {
                 return res.send(response);
             } catch (err) {
                 console.log(err);
+                return res.status(500).send("something went wrong");
             }
         });
     app.route('/uuid')
@@ -28,6 +30,7 @@ const routes = (app) => {
                 return res.send(parsedResponse);
             } catch (err) {
                 console.log(err);
+                return res.status(500).send("something went wrong");
             }
         })
         .delete(async (req, res) => {
@@ -37,6 +40,7 @@ const routes = (app) => {
                 return res.status(200).send("Cart deleted");
             } catch (err) {
                 console.log(err);
+                return res.status(500).send("something went wrong");
             }
         });
     app.route('/addToCart')
@@ -61,6 +65,30 @@ const routes = (app) => {
                 return res.status(500).send("something went wrong");
             }
         });
+    app.route('/checkout')
+        .post(async (req, res) => {
+            const {uuid, address} = req.body;
+            try {
+                const cart = await cartService.getCart(uuid);
+                const parsedCart = await cartUtils.parseCart(cart);
+                const order = await orderService.storeOrder(parsedCart, address);
+                await cartService.deleteCart(uuid);
+                return res.status(200).send(order);
+            } catch (err){
+                console.log(err);
+                return res.status(500).send("something went wrong");
+            }
+        });
+    app.route('/orders')
+        .get(async (req, res) => {
+            try {
+                const orders = await orderService.fetchAllOrders();
+                return res.status(200).send(orders);
+            } catch (err) {
+                console.log(err);
+                return res.status(500).send("something went wrong");
+            }
+        })
 }
 
 export default routes;
