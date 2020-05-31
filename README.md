@@ -19,13 +19,8 @@ fetches the menu in the requested currency
 * GET __/uuid__
 generates and fetches a unique user identifier which is used to ensure the uniqueness of the cart
 
-* GET __/cart/{currency}__
+* GET __/cart/{uuid}&{currency}__
 fetches the cart of the user in the requested currency. If there is no cart registered in this uuid, it creates one
-example request:
-`{
-	"uuid": "59a34e9a-2ae4-4ac7-9317-49266e487666"
-}`
-
 
 * DELETE __/cart__
 deletes the cart of the specified user
@@ -39,7 +34,8 @@ adds an item to the user cart(itemId is the id of the item in the menu)
 example request:
 `{
 	"uuid": "59a34e9a-2ae4-4ac7-9317-49266e487666",
-	"itemId" : 6
+	"itemId" : 6,
+	"currency" : "USD"
 }`
 
 * POST __/removeFromCart__
@@ -47,7 +43,8 @@ removes an item to the user cart(itemId is the id of the item in the menu)
 example request:
 `{
 	"uuid": "59a34e9a-2ae4-4ac7-9317-49266e487666",
-	"itemId" : 6
+	"itemId" : 6,
+	"currency" : "USD"
 }`
 
 * POST __/checkout__

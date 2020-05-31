@@ -16,7 +16,7 @@ const VIEWS_PATH = '../src/main/views';
 const routes = (app) => {
     app.route('/menu/:currency?')
         .get(async (req, res) => {
-            const curr = req.params.currency;
+            const curr = req.params.currency || "EUR";
             try {
                 const items = await menuService.getAll();
                 const response = menuParser.parseFromDB(items);
