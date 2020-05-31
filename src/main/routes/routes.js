@@ -49,7 +49,8 @@ const routes = (app) => {
                 console.log(err);
                 return res.status(500).send("something went wrong");
             }
-        })
+        });
+    app.route('/cart/:uuid?')
         .delete(async (req, res) => {
             const { uuid } = req.body;
             try {
