@@ -1,7 +1,7 @@
 ### How to install and run the project
 
 You should have [node.js](https://nodejs.org/en/) installed as well as [mongodb](https://www.mongodb.com/) on your machine.
-If you use containers or not the default ports, make sure that you change them at config.js and .env files.
+If you do not use the default ports, make sure that you change them at config.js and .env files.
 
 * clone the repository
 * run `npm install` 
