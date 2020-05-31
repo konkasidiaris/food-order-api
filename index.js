@@ -27,5 +27,5 @@ app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).send('500 Something broke! My bad');
 });
-
+app.set('view engine', 'ejs');
 app.listen(PORT, () => console.log(`food-order-api is listening at http://localhost:${PORT}`));

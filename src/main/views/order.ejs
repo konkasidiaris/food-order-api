@@ -1,0 +1,17 @@
+<h3>My orders:</h3>
+<hr>
+<% for (order of orders) { %>
+<ul>
+    <% for (item of order.items) {%>
+    <li>Item name: <strong><%= item.name %></strong></li>
+    <% } %>
+    <li>Name on bell: <strong><%= order.address.nameOnBell %></strong></li>
+    <li>Floor number: <strong><%= order.address.floor %></strong></li>
+    <li>Address: <strong><%= order.address.streetName %></strong></li>
+    <li>Number: <strong><%= order.address.number %></strong></li>
+    <li>Postal code: <strong><%= order.address.postalCode %></strong></li>
+    <li>City: <strong><%= order.address.city %></strong></li>
+    <li>Time: <strong><%= order.createdAt %></strong></li>
+</ul>
+<hr>
+<% } %>
