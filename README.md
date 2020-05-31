@@ -1,7 +1,7 @@
 ### How to install and run the project
 
 You should have [node.js](https://nodejs.org/en/) installed as well as [mongodb](https://www.mongodb.com/) on your machine.
-If you use containers or not the default ports, make sure that you change them at config.js and .env files.
+If you do not use the default ports, make sure that you change them at config.js and .env files.
 
 * clone the repository
 * run `npm install` 
@@ -22,12 +22,8 @@ generates and fetches a unique user identifier which is used to ensure the uniqu
 * GET __/cart/{uuid}&{currency}__
 fetches the cart of the user in the requested currency. If there is no cart registered in this uuid, it creates one
 
-* DELETE __/cart__
+* DELETE __/cart/{uuid}__
 deletes the cart of the specified user
-example request:
-`{
-	"uuid": "59a34e9a-2ae4-4ac7-9317-49266e487666"
-}`
 
 * POST __/addToCart__
 adds an item to the user cart(itemId is the id of the item in the menu)
